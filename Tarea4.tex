@@ -7,7 +7,7 @@
 \usepackage[left=2cm,right=2cm,top=1.8cm,bottom=2.3cm]{geometry}
 \usepackage{fancyhdr}
 \usepackage{lastpage}
-\pagestyle{fancy}
+
 \fancyhf{}
 \rfoot{\textit{Página \thepage \hspace{1pt} de \pageref{LastPage}}}
 
@@ -24,6 +24,7 @@
 
 \usepackage{lipsum}
 \usepackage{enumitem}
+
 
 
 \begin{document}
@@ -226,12 +227,154 @@ El área bajo la curva \(f(x) = \frac{1}{x}\) en el intervalo \([1, e^3]\) es:
 
 % ---- 04. Ejercicio 53 LUIS ---- %
 \section{Ejercicio 53, cap V Review Exercises.}
+\paragraph*{Usa la Parte 2 del Teorema Fundamental del Cálculo y (cuando sea necesario) la Fórmula (18) de la Sección 5.10 para encontrar la derivada.}
+\begin{equation*}
+  \frac{d}{dx}\left[\int_{2}^{\sin x} \frac{1}{1+t^3}dt\right]
+  \vspace{0.3cm}
+\end{equation*}
+
+Utilizaremos la Fórmula (18) del texto, que establece:
+\[
+\frac{d}{dx}\left[\int_{a}^{g(x)} f(t) dt\right] = f(g(x))g'(x)
+\]
+
+Donde:
+\begin{itemize}
+    \item $f(g(x))$ significa evaluar el integrando en el límite superior
+    \item $g'(x)$ es la derivada del límite superior
+\end{itemize}
+
+\subsection*{Desarrollo}
+\begin{enumerate}
+    \item Evaluamos $f(g(x))$:
+    \[
+    f(g(x)) = f(\sin x) = \frac{1}{1+(\sin x)^3}
+    \]
+    
+    \item Calculamos $g'(x)$:
+    \[
+    g'(x) = \frac{d}{dx}(\sin x) = \cos x
+    \]
+    
+    \item Aplicamos la fórmula:
+    \[
+    \frac{d}{dx}\left[\int_{2}^{\sin x} \frac{1}{1+t^3} dt\right] = \frac{1}{1+(\sin x)^3} \cdot \cos x
+    \]
+\end{enumerate}
+
+\subsection*{Resultado}
+\[
+\boxed{\frac{d}{dx}\left[\int_{2}^{\sin x} \frac{1}{1+t^3} dt\right] = \frac{\cos x}{1+(\sin x)^3}}
+\]
+
+
 
 % ---- 05. Ejercicio 56 LUIS ---- %
 \section{Ejercicio 56, cap V Review Exercises.}
+\paragraph*{Dada la función \( F(x) = \int_0^x \frac{t^2 - 3}{t^4 + 7} \, dt \):}
+\\
+\begin{enumerate}
+    \item[(a)] Encuentra los intervalos en los que \( F \) es creciente y aquellos en los que \( F \) es decreciente.
+    \item[(b)] Encuentra los intervalos abiertos en los que \( F \) es cóncava hacia arriba y aquellos en los que \( F \) es cóncava hacia abajo.
+    \item[(c)] Encuentra los valores de \( x \), si existen, en los que la función \( F \) tiene extremos absolutos.
+    \item[(d)] Usa un software algebraico computacional (CAS) para graficar \( F \) y confirma que los resultados de las partes (a), (b) y (c) son consistentes con la gráfica.
+\end{enumerate}
+
+\subsection*{(a) Encuentra los intervalos en los que \( F \) es creciente y aquellos en los que \( F \) es decreciente.}
+
+Para encontrar estos intervalos, analizamos $F'(x)$. Por el Teorema Fundamental del Cálculo:
+\[F'(x) = \frac{x^2-3}{x^4+7}\]
+
+$F$ está aumentando cuando $F'(x) > 0$ y disminuyendo cuando $F'(x) < 0$.
+
+Analizamos el numerador $x^2-3$:
+\begin{itemize}
+    \item $x^2-3 = 0 \Rightarrow x = \pm\sqrt{3}$
+    \item $x^2-3 < 0$ para $x \in (-\sqrt{3}, \sqrt{3})$
+    \item $x^2-3 > 0$ para $x \in (-\infty, -\sqrt{3}) \cup (\sqrt{3}, \infty)$
+\end{itemize}
+
+El denominador $x^4+7$ es siempre positivo para todo $x$ real.
+
+Por lo tanto:
+\begin{itemize}
+    \item $F$ está disminuyendo en $(-\sqrt{3}, \sqrt{3})$
+    \item $F$ está aumentando en $(-\infty, -\sqrt{3}) \cup (\sqrt{3}, \infty)$
+\end{itemize}
+
+\subsection*{(b) Encuentra los intervalos abiertos en los que \( F \) es cóncava hacia arriba y aquellos en los que \( F \) es cóncava hacia abajo.}
+
+Para determinar la concavidad, necesitamos $F''(x)$:
+\[F''(x) = \frac{d}{dx}\left(\frac{x^2-3}{x^4+7}\right) = \frac{(2x)(x^4+7) - (x^2-3)(4x^3)}{(x^4+7)^2}\]
+
+Simplificando:
+\[F''(x) = \frac{2x^5+14x - 4x^5+12x^3}{(x^4+7)^2} = \frac{-2x^5+12x^3+14x}{(x^4+7)^2}\]
+\[F''(x) = \frac{x(14-2x^4+12x^2)}{(x^4+7)^2}\]
+
+El denominador es siempre positivo, así que el signo depende del numerador.
+
+Sea $g(x) = 14-2x^4+12x^2$. Los puntos donde $g(x)=0$ podemos determinar que:
+\begin{itemize}
+    \item Para $x$ suficientemente grande, el término $-2x^4$ domina y $g(x)$ es negativo
+    \item Para $x$ cerca de 0, el término 14 domina y $g(x)$ es positivo
+\end{itemize}
+
+\subsection*{(c) Encuentra los valores de \( x \), si existen, en los que la función \( F \) tiene extremos absolutos.}
+
+Los extremos absolutos pueden ocurrir en:
+\begin{itemize}
+    \item Puntos donde $F'(x) = 0$: en $x = \pm\sqrt{3}$
+    \item El punto inicial $x = 0$
+\end{itemize}
+
+Por lo tanto, los extremos absolutos ocurren en $x = \pm\sqrt{3}$, siendo:
+\begin{itemize}
+    \item Mínimo local en $x = -\sqrt{3}$
+    \item Máximo local en $x = \sqrt{3}$
+\end{itemize}
+
+\subsection*{(d) Usa un software algebraico computacional (CAS) para graficar \( F \) y confirma que los resultados de las partes (a), (b) y (c) son consistentes con la gráfica.}
+
+\includegraphics[height=7cm]{./imagenes/ej56.png}
 
 % ---- 06. Ejercicio 64 LUIS ---- %
 \section{Ejercicio 64, cap V Review Exercises.}
+\paragraph*{64. Encuentra el valor promedio de \( f(x) = e^x + e^{-x} \) en el intervalo \([ \ln\frac{1}{2}, \ln 2 ]\).}
+El valor promedio de una función en un intervalo $[a,b]$ se calcula mediante:
+
+$$\overline{f}=\frac{1}{b-a}\int_a^b f(x)dx$$
+
+Donde:
+\begin{align*}
+a &= \ln \frac{1}{2} \\
+b &= \ln 2 \\
+f(x) &= e^x + e^{-x}
+\end{align*}
+
+Entonces:
+$$\overline{f}=\frac{1}{\ln 2-\ln \frac{1}{2}}\int_{\ln \frac{1}{2}}^{\ln 2} (e^x+e^{-x})dx$$
+
+Para la integral:
+$$\int (e^x+e^{-x})dx = e^x-e^{-x}+C$$
+
+Evaluando en los límites:
+\begin{align*}
+[e^x-e^{-x}]_{\ln \frac{1}{2}}^{\ln 2} &= (e^{\ln 2}-e^{-\ln 2})-(e^{\ln \frac{1}{2}}-e^{-\ln \frac{1}{2}}) \\
+&= (2-\frac{1}{2})-(\frac{1}{2}-2) \\
+&= (2-\frac{1}{2})+(2-\frac{1}{2}) \\
+&= 2(2-\frac{1}{2}) \\
+&= 2(\frac{3}{2}) \\
+&= 3
+\end{align*}
+
+Para el denominador:
+\begin{align*}
+\ln 2-\ln \frac{1}{2} &= \ln 2-(-\ln 2) \\
+&= 2\ln 2
+\end{align*}
+
+Por lo tanto:
+$$\overline{f}=\frac{3}{2\ln 2}$$
 
 % ---- 07. Ejercicio 68 IHEBEL ---- %
 \section{Ejercicio 68, cap V Review Exercises.}
@@ -317,6 +460,51 @@ Por lo tanto, la ecuación de posición $s(t)$ está dada por
 
 % ---- 08. Ejercicio 73 LUIS ---- %
 \section{Ejercicio 73, cap V Review Exercises.}
+\paragraph*{Una partícula se mueve con una velocidad de v(t) m/s a lo largo de un eje s. Encuentra el desplazamiento y la distancia recorrida por la partícula durante el intervalo de tiempo dado.}
+
+\begin{equation*}
+    v(t) = \frac{1}{2} - \frac{1}{t^2}; \quad 1 \leq t \leq 3
+\end{equation*}
+
+Dada la velocidad $v(t) = \frac{1}{2} - \frac{1}{t^2}$ para $1 \leq t \leq 3$
+
+\subsection*{Desplazamiento}
+
+El desplazamiento se calcula integrando la velocidad:
+
+\begin{align*}
+\text{Desplazamiento} &= \int_{1}^{3} \left(\frac{1}{2} - \frac{1}{t^2}\right)dt \\
+&= \int_{1}^{3} \frac{1}{2}dt - \int_{1}^{3} \frac{1}{t^2}dt \\
+&= \left[\frac{1}{2}t + \frac{1}{t}\right]_{1}^{3} \\
+&= \left(\frac{1}{2}(3) + \frac{1}{3}\right) - \left(\frac{1}{2}(1) + 1\right) \\
+&= \left(1.5 + \frac{1}{3}\right) - (0.5 + 1) \\
+&= 1.83 - 1.5 \\
+&= 0.33 \text{ metros}
+\end{align*}
+
+\subsection*{Distancia Recorrida}
+
+Para la distancia recorrida, necesitamos $|v(t)| = \left|\frac{1}{2} - \frac{1}{t^2}\right|$
+
+Encontramos el punto donde $v(t) = 0$:
+\begin{align*}
+\frac{1}{2} - \frac{1}{t^2} &= 0 \\
+\frac{1}{2} &= \frac{1}{t^2} \\
+t^2 &= 2 \\
+t &= \sqrt{2} = 1.414
+\end{align*}
+
+Como $\sqrt{2}$ está en $[1,3]$, la partícula cambia de dirección.
+
+
+\begin{align*}
+  \text{Distancia} &= \int_{1}^{\sqrt{2}} \left|-\left(\frac{1}{2} - \frac{1}{t^2}\right)\right|dt + \int_{\sqrt{2}}^{3} \left|\frac{1}{2} - \frac{1}{t^2}\right|dt \\
+  &= \int_{1}^{\sqrt{2}} \left(\frac{1}{t^2} - \frac{1}{2}\right)dt + \int_{\sqrt{2}}^{3} \left(\frac{1}{2} - \frac{1}{t^2}\right)dt \\
+  &= \left[-\frac{1}{t} - \frac{1}{2}t\right]_{1}^{\sqrt{2}} + \left[\frac{1}{2}t + \frac{1}{t}\right]_{\sqrt{2}}^{3} \\
+  &= \left(-\frac{1}{\sqrt{2}} - \frac{\sqrt{2}}{2}\right) - \left(-1 - \frac{1}{2}\right) + \left(\frac{3}{2} + \frac{1}{3}\right) - \left(\frac{\sqrt{2}}{2} + \frac{1}{\sqrt{2}}\right) \\
+  &= \left(-\frac{1}{\sqrt{2}} - \frac{\sqrt{2}}{2} + 1.5\right) + \left(\frac{3}{2} + \frac{1}{3} - \frac{\sqrt{2}}{2} - \frac{1}{\sqrt{2}}\right) \\
+  & = 0.7120 \text{ metros}
+  \end{align*}
 
 % ---- 09. Ejercicio 76 YAMILE ---- %
 \section{Ejercicio 76, cap V Review Exercises.}
@@ -542,6 +730,64 @@ El área encerrada entre las curvas es:
 
 % ---- 12. Ejercicio 13 LUIS ---- %
 \section{Ejercicio 13, cap VI Review Exercises.}
+\paragraph*{Encuentra la longitud de arco en el segundo cuadrante de la curva:}
+\begin{equation*}
+    x^{2/3} + y^{2/3} = 4, \quad \text{desde } x = -8 \text{ hasta } x = -1
+\end{equation*}
+
+\subsection*{Fórmula para la Longitud de Arco}
+La longitud de arco $L$ de una curva definida por $y = f(x)$ entre $x = a$ y $x = b$ usaremos la f\'ormula:
+
+\begin{equation*}
+  L = \int_{a}^{b} \sqrt{1 + \left(\frac{dy}{dx}\right)^2} dx
+\end{equation*}
+
+Iniciaremos despejando a $y$:
+
+\begin{equation*}
+  y^{2/3} = 4 - x^{2/3}
+\end{equation*}
+
+\begin{equation*}
+  y = \left( 4 - x^{2/3} \right)^{3/2}
+\end{equation*}
+Como estamos en el segundo cuadrante, debemos tener $x < 0$, y el valor de $y$ debe ser positivo.
+
+\subsection*{Derivamos la Función $y(x)$}
+Primero derivamos $y$ respecto a $x$:
+
+\begin{equation*}
+  y = \left( 4 - x^{2/3} \right)^{3/2}
+\end{equation*}
+
+Usando la regla de la cadena:
+
+\begin{equation*}
+  \frac{dy}{dx} = \frac{3}{2} \left( 4 - x^{2/3} \right)^{1/2} \cdot \left( -\frac{2}{3} x^{-1/3} \right)
+\end{equation*}
+
+\begin{equation*}
+  \frac{dy}{dx} = -\frac{1}{x^{1/3}} \left( 4 - x^{2/3} \right)^{1/2}
+\end{equation*}
+
+\subsection*{Sustituir en la Fórmula de la Longitud de Arco}
+Ahora sustituimos $\frac{dy}{dx}$ en la f\'ormula de la longitud de arco:
+
+\begin{equation*}
+  L = \int_{-8}^{-1} \sqrt{1 + \left( -\frac{1}{x^{1/3}} \left( 4 - x^{2/3} \right)^{1/2} \right)^2} \, dx
+\end{equation*}
+
+\begin{equation*}
+  L = \int_{-8}^{-1} \sqrt{1 + \frac{(4 - x^{2/3})}{x^{2/3}}} \, dx
+\end{equation*}
+
+Finalmente calculamos la integral:
+\begin{align*}
+    L &= \int_{-8}^{-1} \sqrt{1 + \frac{4-x^{2/3}}{x^{2/3}}} \, dx \\
+    &= \int_{-8}^{-1} \sqrt{\frac{x^{2/3} + 4-x^{2/3}}{x^{2/3}}} \, dx \\
+    &= \int_{-8}^{-1} \sqrt{\frac{4}{x^{2/3}}} \, dx = 9
+    \end{align*}
+
 
 % ---- 13. Ejercicio 16 YAMILE ---- %
 \section{Ejercicio 16, cap VI Review Exercises.}
@@ -786,9 +1032,186 @@ En ambos casos obtenemos el mismo resultado.
 
 % ---- 16. Ejercicio 14 LUIS ---- %
 \section{Ejercicio 14, cap VII Review Exercises.}
+Una partícula moviéndose a lo largo del eje $x$ tiene una función de velocidad $v(t)=t^2e^{-t}$. ¿Qué distancia recorre la partícula desde $t=0$ hasta $t=5$?
+\\
+\\La distancia recorrida por la partícula está dada por:
+\[
+d = \int_0^5 |v(t)| \, dt
+\]
+
+\subsection*{Resolución de la integral}
+Para resolver \( \int t^2 e^{-t} \, dt \), utilizamos el método de integración por partes:
+\[
+u = t^2, \quad dv = e^{-t} \, dt
+\]
+Entonces:
+\[
+du = 2t \, dt, \quad v = -e^{-t}
+\]
+Aplicando la fórmula de integración por partes:
+\[
+\int t^2 e^{-t} \, dt = -t^2 e^{-t} + \int 2t e^{-t} \, dt
+\]
+
+Ahora, resolvemos la integral \( \int 2t e^{-t} \, dt \) nuevamente por partes:
+\[
+u = 2t, \quad dv = e^{-t} \, dt \quad \Rightarrow \quad du = 2 \, dt, \quad v = -e^{-t}
+\]
+Entonces:
+\[
+\int 2t e^{-t} \, dt = -2t e^{-t} + \int 2e^{-t} \, dt
+\]
+La última integral es:
+\[
+\int 2e^{-t} \, dt = -2e^{-t}
+\]
+Por lo tanto:
+\[
+\int 2t e^{-t} \, dt = -2t e^{-t} - 2e^{-t}
+\]
+
+Sustituyendo este resultado en la expresión original:
+\[
+\int t^2 e^{-t} \, dt = -t^2 e^{-t} - 2t e^{-t} - 2e^{-t}
+\]
+
+\subsection*{Evaluamos los límites}
+Evaluamos la integral en los límites \( t = 0 \) y \( t = 5 \):
+\[
+d = \left[ -t^2 e^{-t} - 2t e^{-t} - 2e^{-t} \right]_0^5
+\]
+
+Primero, evaluamos en \( t = 5 \):
+\[
+-t^2 e^{-t} - 2t e^{-t} - 2e^{-t} = -5^2 e^{-5} - 2(5)e^{-5} - 2e^{-5}
+\]
+\[
+= -25e^{-5} - 10e^{-5} - 2e^{-5} = -37e^{-5}
+\]
+
+Luego, evaluamos en \( t = 0 \):
+\[
+-0^2 e^{0} - 2(0)e^{0} - 2e^{0} = -2
+\]
+
+Por lo tanto:
+\[
+d = \left(-37e^{-5} - (-2)\right) = 2 - 37e^{-5}
+\]
+\\El resultado será: 
+\begin{equation*}
+  d = 1.750
+\end{equation*}
+
 
 % ---- 17. Ejercicio 33 LUIS ---- %
 \section{Ejercicio 33, cap VII Review Exercises.}
+Considera la integral $\displaystyle\int \frac{1}{x^3 - x} dx$.
+
+\begin{enumerate}[label=(\alph*)]
+    \item Evalúa la integral usando la sustitución $x = \sec \theta$. 
+    ¿Para qué valores de $x$ es válido tu resultado?
+
+    \item Evalúa la integral usando la sustitución $x = \sin \theta$. 
+    ¿Para qué valores de $x$ es válido tu resultado?
+
+    \item Evalúa la integral usando el método de fracciones parciales. 
+    ¿Para qué valores de $x$ es válido tu resultado?
+\end{enumerate}
+
+\subsection*{Inciso (a): Sustitución trigonométrica: $x = \sec \theta$}
+
+
+Realizamos las sustituciones:
+\begin{align*}
+x &= \sec \theta \\
+dx &= \sec \theta \tan \theta \, d\theta \\
+x^3 - x &= \sec^3\theta - \sec \theta
+\end{align*}
+
+La integral se transforma en:
+\begin{align*}
+&\int \frac{1}{\sec^3\theta - \sec \theta} \sec \theta \tan \theta \, d\theta \\
+&= \int \frac{\sec \theta \tan \theta}{\sec^3\theta - \sec \theta} \, d\theta \\
+&= \int \frac{\tan \theta}{\sec^2\theta - 1} \, d\theta \\
+&= \int \frac{\tan \theta}{\tan^2\theta} \, d\theta \\
+&= \int \frac{1}{\tan \theta} \, d\theta \\
+&= \ln|\sin \theta| + C
+\end{align*}
+
+Regresando a la variable original:
+\[ \ln\left|\sqrt{1 - \frac{1}{x^2}}\right| + C \]
+
+\textbf{Validez:} $|x| > 1$.
+
+\subsection*{Inciso (b): Usando $x = \sin \theta$}
+
+\begin{align*}
+& \text{Sea } x = \sin \theta \\
+& dx = \cos \theta \, d\theta \\
+& x^3 - x = \sin^3\theta - \sin \theta = \sin \theta(\sin^2\theta - 1) = -\sin \theta \cos^2\theta \\
+& \text{La integral se convierte en: } \int\frac{\cos \theta \, d\theta}{-\sin \theta \cos^2\theta} = -\int\frac{d\theta}{\sin \theta} \\
+& \text{Esto nos da } -\ln|\cos \theta| \\
+& \text{Como } x = \sin \theta, \text{ entonces } \cos \theta = \sqrt{1-x^2} \\
+& \therefore \int\frac{1}{x^3-x}dx = \ln\left|\frac{\sqrt{1-x^2}}{x}\right| + C 
+\end{align*}
+\textbf{ Validez:} Es valido para $|x| < 1$
+
+\subsection*{Inciso (c): M\'etodo de Fracciones Parciales}
+Factorizamos el denominador:
+
+\begin{equation*}
+    \frac{1}{x(x-1)(x+1)} = \frac{A}{x} + \frac{B}{x-1} + \frac{C}{x+1}
+\end{equation*}
+
+Multiplicamos ambos lados por el denominador com\'un $x(x-1)(x+1)$:
+
+\begin{equation*}
+    1 = A(x-1)(x+1) + Bx(x+1) + Cx(x-1)
+\end{equation*}
+
+Expandiendo y agrupando t\'erminos similares:
+
+\begin{equation*}
+    1 = (A + B + C)x^2 + (B - C)x + (-A)
+\end{equation*}
+
+Para que esta igualdad sea cierta para todos los valores de $x$, los coeficientes deben ser iguales:
+
+\begin{align*}
+    A + B + C &= 0 \\
+    B - C &= 0 \\
+    -A &= 1
+\end{align*}
+
+De la tercera ecuaci\'on, obtenemos $A = -1$. De la segunda ecuaci\'on, $B = C$. De la primera ecuaci\'on:
+
+\begin{equation*}
+    -1 + B + B = 0 \implies B = \frac{1}{2}, \quad C = \frac{1}{2}
+\end{equation*}
+
+Por lo tanto:
+
+\begin{equation*}
+    \frac{1}{x(x-1)(x+1)} = \frac{-1}{x} + \frac{1/2}{x-1} + \frac{1/2}{x+1}
+\end{equation*}
+
+Integrando ambos lados:
+
+\begin{equation*}
+    \int \, \frac{1}{x(x-1)(x+1)} \, dx = \int \left( \frac{-1}{x} + \frac{1/2}{x-1} + \frac{1/2}{x+1} \right) \, dx
+\end{equation*}
+
+\begin{equation*}
+    = -\ln |x| + \frac{1}{2} \ln |x-1| + \frac{1}{2} \ln |x+1| + C
+\end{equation*}
+
+\begin{equation*}
+    = \ln \left| \frac{\sqrt{(x-1)(x+1)}}{x} \right| + C
+\end{equation*}
+
+\textbf{Validez}: Este resultado es v\'alido siempre que $x \neq 0, \pm 1$.
+
 
 % ---- 18. Ejercicio 41 IHEBEL ---- %
 \section{Ejercicio 41, cap VII Review Exercises.}
@@ -1110,6 +1533,5 @@ El volumen del sólido restante no depende del radio \(R\) y es igual a:
 \[
 V = 36\pi \, \mathrm{mm}^3.
 \]
-
 
 \end{document}
